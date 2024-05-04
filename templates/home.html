@@ -41,13 +41,19 @@
           {% for tc in tasksnotdone %}
           <div class="card m-1">
             <div class="card-body">
-              {{ tc.task}}
+              {{forloop.counter}}-{{ tc.task}}
               <span style="position: relative; float: right">
-                <a class="btn btn-success"
+                <a
+                  href="{% url 'markascompleted' tc.id %}"
+                  class="btn btn-success"
                   ><i class="fa fa-check"></i> Mark as Done</a
                 >
-                <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                <a class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'deletetask' tc.id %}" class="btn btn-danger"
+                  ><i class="fa fa-trash"></i
+                ></a>
+                <a href="{% url 'edittask' tc.id %}" class="btn btn-primary"
+                  ><i class="fa fa-pencil"></i
+                ></a>
               </span>
             </div>
           </div>
@@ -59,7 +65,14 @@
           <!-- List of all the tasks that have completed -->
           {% for tc in tasksdone %}
           <div class="card m-1">
-            <div class="card-body">{{ tc.task }}</div>
+            <div class="card-body">
+              {{ tc.task }}
+              <span style="position: relative; float: right">
+                <a href="{% url 'markasundone' tc.id %}" class="btn btn-danger"
+                  ><i class="fa fa-undo"></i> Mark as Undone</a
+                >
+              </span>
+            </div>
           </div>
           {% endfor %}
         </div>
